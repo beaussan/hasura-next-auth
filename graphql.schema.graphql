@@ -1,0 +1,2144 @@
+schema {
+  query: query_root
+  mutation: mutation_root
+  subscription: subscription_root
+}
+
+"""
+expression to compare columns of type String. All fields are combined with logical 'AND'.
+"""
+input String_comparison_exp {
+  _eq: String
+  _gt: String
+  _gte: String
+  _ilike: String
+  _in: [String!]
+  _is_null: Boolean
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+  _nilike: String
+  _nin: [String!]
+  _nlike: String
+  _nsimilar: String
+  _similar: String
+}
+
+"""
+columns and relationships of "accounts"
+"""
+type accounts {
+  access_token: String
+  access_token_expires: timestamptz
+  compound_id: String!
+  created_at: timestamptz!
+  id: uuid!
+  provider_account_id: String!
+  provider_id: String!
+  provider_type: String!
+  refresh_token: String
+  updated_at: timestamptz!
+
+  """An object relationship"""
+  user: users!
+  user_id: uuid!
+}
+
+"""
+aggregated selection of "accounts"
+"""
+type accounts_aggregate {
+  aggregate: accounts_aggregate_fields
+  nodes: [accounts!]!
+}
+
+"""
+aggregate fields of "accounts"
+"""
+type accounts_aggregate_fields {
+  count(columns: [accounts_select_column!], distinct: Boolean): Int
+  max: accounts_max_fields
+  min: accounts_min_fields
+}
+
+"""
+order by aggregate values of table "accounts"
+"""
+input accounts_aggregate_order_by {
+  count: order_by
+  max: accounts_max_order_by
+  min: accounts_min_order_by
+}
+
+"""
+input type for inserting array relation for remote table "accounts"
+"""
+input accounts_arr_rel_insert_input {
+  data: [accounts_insert_input!]!
+  on_conflict: accounts_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "accounts". All fields are combined with a logical 'AND'.
+"""
+input accounts_bool_exp {
+  _and: [accounts_bool_exp]
+  _not: accounts_bool_exp
+  _or: [accounts_bool_exp]
+  access_token: String_comparison_exp
+  access_token_expires: timestamptz_comparison_exp
+  compound_id: String_comparison_exp
+  created_at: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  provider_account_id: String_comparison_exp
+  provider_id: String_comparison_exp
+  provider_type: String_comparison_exp
+  refresh_token: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
+  user: users_bool_exp
+  user_id: uuid_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "accounts"
+"""
+enum accounts_constraint {
+  """unique or primary key constraint"""
+  accounts_compound_id_key
+
+  """unique or primary key constraint"""
+  accounts_pkey
+}
+
+"""
+input type for inserting data into table "accounts"
+"""
+input accounts_insert_input {
+  access_token: String
+  access_token_expires: timestamptz
+  compound_id: String
+  created_at: timestamptz
+  id: uuid
+  provider_account_id: String
+  provider_id: String
+  provider_type: String
+  refresh_token: String
+  updated_at: timestamptz
+  user: users_obj_rel_insert_input
+  user_id: uuid
+}
+
+"""aggregate max on columns"""
+type accounts_max_fields {
+  access_token: String
+  access_token_expires: timestamptz
+  compound_id: String
+  created_at: timestamptz
+  id: uuid
+  provider_account_id: String
+  provider_id: String
+  provider_type: String
+  refresh_token: String
+  updated_at: timestamptz
+  user_id: uuid
+}
+
+"""
+order by max() on columns of table "accounts"
+"""
+input accounts_max_order_by {
+  access_token: order_by
+  access_token_expires: order_by
+  compound_id: order_by
+  created_at: order_by
+  id: order_by
+  provider_account_id: order_by
+  provider_id: order_by
+  provider_type: order_by
+  refresh_token: order_by
+  updated_at: order_by
+  user_id: order_by
+}
+
+"""aggregate min on columns"""
+type accounts_min_fields {
+  access_token: String
+  access_token_expires: timestamptz
+  compound_id: String
+  created_at: timestamptz
+  id: uuid
+  provider_account_id: String
+  provider_id: String
+  provider_type: String
+  refresh_token: String
+  updated_at: timestamptz
+  user_id: uuid
+}
+
+"""
+order by min() on columns of table "accounts"
+"""
+input accounts_min_order_by {
+  access_token: order_by
+  access_token_expires: order_by
+  compound_id: order_by
+  created_at: order_by
+  id: order_by
+  provider_account_id: order_by
+  provider_id: order_by
+  provider_type: order_by
+  refresh_token: order_by
+  updated_at: order_by
+  user_id: order_by
+}
+
+"""
+response of any mutation on the table "accounts"
+"""
+type accounts_mutation_response {
+  """number of affected rows by the mutation"""
+  affected_rows: Int!
+
+  """data of the affected rows by the mutation"""
+  returning: [accounts!]!
+}
+
+"""
+input type for inserting object relation for remote table "accounts"
+"""
+input accounts_obj_rel_insert_input {
+  data: accounts_insert_input!
+  on_conflict: accounts_on_conflict
+}
+
+"""
+on conflict condition type for table "accounts"
+"""
+input accounts_on_conflict {
+  constraint: accounts_constraint!
+  update_columns: [accounts_update_column!]!
+  where: accounts_bool_exp
+}
+
+"""
+ordering options when selecting data from "accounts"
+"""
+input accounts_order_by {
+  access_token: order_by
+  access_token_expires: order_by
+  compound_id: order_by
+  created_at: order_by
+  id: order_by
+  provider_account_id: order_by
+  provider_id: order_by
+  provider_type: order_by
+  refresh_token: order_by
+  updated_at: order_by
+  user: users_order_by
+  user_id: order_by
+}
+
+"""
+primary key columns input for table: "accounts"
+"""
+input accounts_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "accounts"
+"""
+enum accounts_select_column {
+  """column name"""
+  access_token
+
+  """column name"""
+  access_token_expires
+
+  """column name"""
+  compound_id
+
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  provider_account_id
+
+  """column name"""
+  provider_id
+
+  """column name"""
+  provider_type
+
+  """column name"""
+  refresh_token
+
+  """column name"""
+  updated_at
+
+  """column name"""
+  user_id
+}
+
+"""
+input type for updating data in table "accounts"
+"""
+input accounts_set_input {
+  access_token: String
+  access_token_expires: timestamptz
+  compound_id: String
+  created_at: timestamptz
+  id: uuid
+  provider_account_id: String
+  provider_id: String
+  provider_type: String
+  refresh_token: String
+  updated_at: timestamptz
+  user_id: uuid
+}
+
+"""
+update columns of table "accounts"
+"""
+enum accounts_update_column {
+  """column name"""
+  access_token
+
+  """column name"""
+  access_token_expires
+
+  """column name"""
+  compound_id
+
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  provider_account_id
+
+  """column name"""
+  provider_id
+
+  """column name"""
+  provider_type
+
+  """column name"""
+  refresh_token
+
+  """column name"""
+  updated_at
+
+  """column name"""
+  user_id
+}
+
+"""
+columns and relationships of "allowed_roles"
+"""
+type allowed_roles {
+  role: roles_enum!
+
+  """An object relationship"""
+  roleByRole: roles!
+
+  """An object relationship"""
+  user: users!
+  user_id: uuid!
+}
+
+"""
+aggregated selection of "allowed_roles"
+"""
+type allowed_roles_aggregate {
+  aggregate: allowed_roles_aggregate_fields
+  nodes: [allowed_roles!]!
+}
+
+"""
+aggregate fields of "allowed_roles"
+"""
+type allowed_roles_aggregate_fields {
+  count(columns: [allowed_roles_select_column!], distinct: Boolean): Int
+  max: allowed_roles_max_fields
+  min: allowed_roles_min_fields
+}
+
+"""
+order by aggregate values of table "allowed_roles"
+"""
+input allowed_roles_aggregate_order_by {
+  count: order_by
+  max: allowed_roles_max_order_by
+  min: allowed_roles_min_order_by
+}
+
+"""
+input type for inserting array relation for remote table "allowed_roles"
+"""
+input allowed_roles_arr_rel_insert_input {
+  data: [allowed_roles_insert_input!]!
+  on_conflict: allowed_roles_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "allowed_roles". All fields are combined with a logical 'AND'.
+"""
+input allowed_roles_bool_exp {
+  _and: [allowed_roles_bool_exp]
+  _not: allowed_roles_bool_exp
+  _or: [allowed_roles_bool_exp]
+  role: roles_enum_comparison_exp
+  roleByRole: roles_bool_exp
+  user: users_bool_exp
+  user_id: uuid_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "allowed_roles"
+"""
+enum allowed_roles_constraint {
+  """unique or primary key constraint"""
+  allowed_roles_pkey
+}
+
+"""
+input type for inserting data into table "allowed_roles"
+"""
+input allowed_roles_insert_input {
+  role: roles_enum
+  roleByRole: roles_obj_rel_insert_input
+  user: users_obj_rel_insert_input
+  user_id: uuid
+}
+
+"""aggregate max on columns"""
+type allowed_roles_max_fields {
+  user_id: uuid
+}
+
+"""
+order by max() on columns of table "allowed_roles"
+"""
+input allowed_roles_max_order_by {
+  user_id: order_by
+}
+
+"""aggregate min on columns"""
+type allowed_roles_min_fields {
+  user_id: uuid
+}
+
+"""
+order by min() on columns of table "allowed_roles"
+"""
+input allowed_roles_min_order_by {
+  user_id: order_by
+}
+
+"""
+response of any mutation on the table "allowed_roles"
+"""
+type allowed_roles_mutation_response {
+  """number of affected rows by the mutation"""
+  affected_rows: Int!
+
+  """data of the affected rows by the mutation"""
+  returning: [allowed_roles!]!
+}
+
+"""
+input type for inserting object relation for remote table "allowed_roles"
+"""
+input allowed_roles_obj_rel_insert_input {
+  data: allowed_roles_insert_input!
+  on_conflict: allowed_roles_on_conflict
+}
+
+"""
+on conflict condition type for table "allowed_roles"
+"""
+input allowed_roles_on_conflict {
+  constraint: allowed_roles_constraint!
+  update_columns: [allowed_roles_update_column!]!
+  where: allowed_roles_bool_exp
+}
+
+"""
+ordering options when selecting data from "allowed_roles"
+"""
+input allowed_roles_order_by {
+  role: order_by
+  roleByRole: roles_order_by
+  user: users_order_by
+  user_id: order_by
+}
+
+"""
+primary key columns input for table: "allowed_roles"
+"""
+input allowed_roles_pk_columns_input {
+  role: roles_enum!
+  user_id: uuid!
+}
+
+"""
+select columns of table "allowed_roles"
+"""
+enum allowed_roles_select_column {
+  """column name"""
+  role
+
+  """column name"""
+  user_id
+}
+
+"""
+input type for updating data in table "allowed_roles"
+"""
+input allowed_roles_set_input {
+  role: roles_enum
+  user_id: uuid
+}
+
+"""
+update columns of table "allowed_roles"
+"""
+enum allowed_roles_update_column {
+  """column name"""
+  role
+
+  """column name"""
+  user_id
+}
+
+"""mutation root"""
+type mutation_root {
+  """
+  delete data from the table: "accounts"
+  """
+  delete_accounts(
+    """filter the rows which have to be deleted"""
+    where: accounts_bool_exp!
+  ): accounts_mutation_response
+
+  """
+  delete single row from the table: "accounts"
+  """
+  delete_accounts_by_pk(id: uuid!): accounts
+
+  """
+  delete data from the table: "allowed_roles"
+  """
+  delete_allowed_roles(
+    """filter the rows which have to be deleted"""
+    where: allowed_roles_bool_exp!
+  ): allowed_roles_mutation_response
+
+  """
+  delete single row from the table: "allowed_roles"
+  """
+  delete_allowed_roles_by_pk(role: roles_enum!, user_id: uuid!): allowed_roles
+
+  """
+  delete data from the table: "roles"
+  """
+  delete_roles(
+    """filter the rows which have to be deleted"""
+    where: roles_bool_exp!
+  ): roles_mutation_response
+
+  """
+  delete single row from the table: "roles"
+  """
+  delete_roles_by_pk(value: String!): roles
+
+  """
+  delete data from the table: "users"
+  """
+  delete_users(
+    """filter the rows which have to be deleted"""
+    where: users_bool_exp!
+  ): users_mutation_response
+
+  """
+  delete single row from the table: "users"
+  """
+  delete_users_by_pk(id: uuid!): users
+
+  """
+  delete data from the table: "verification_requests"
+  """
+  delete_verification_requests(
+    """filter the rows which have to be deleted"""
+    where: verification_requests_bool_exp!
+  ): verification_requests_mutation_response
+
+  """
+  delete single row from the table: "verification_requests"
+  """
+  delete_verification_requests_by_pk(id: uuid!): verification_requests
+
+  """
+  insert data into the table: "accounts"
+  """
+  insert_accounts(
+    """the rows to be inserted"""
+    objects: [accounts_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: accounts_on_conflict
+  ): accounts_mutation_response
+
+  """
+  insert a single row into the table: "accounts"
+  """
+  insert_accounts_one(
+    """the row to be inserted"""
+    object: accounts_insert_input!
+
+    """on conflict condition"""
+    on_conflict: accounts_on_conflict
+  ): accounts
+
+  """
+  insert data into the table: "allowed_roles"
+  """
+  insert_allowed_roles(
+    """the rows to be inserted"""
+    objects: [allowed_roles_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: allowed_roles_on_conflict
+  ): allowed_roles_mutation_response
+
+  """
+  insert a single row into the table: "allowed_roles"
+  """
+  insert_allowed_roles_one(
+    """the row to be inserted"""
+    object: allowed_roles_insert_input!
+
+    """on conflict condition"""
+    on_conflict: allowed_roles_on_conflict
+  ): allowed_roles
+
+  """
+  insert data into the table: "roles"
+  """
+  insert_roles(
+    """the rows to be inserted"""
+    objects: [roles_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: roles_on_conflict
+  ): roles_mutation_response
+
+  """
+  insert a single row into the table: "roles"
+  """
+  insert_roles_one(
+    """the row to be inserted"""
+    object: roles_insert_input!
+
+    """on conflict condition"""
+    on_conflict: roles_on_conflict
+  ): roles
+
+  """
+  insert data into the table: "users"
+  """
+  insert_users(
+    """the rows to be inserted"""
+    objects: [users_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: users_on_conflict
+  ): users_mutation_response
+
+  """
+  insert a single row into the table: "users"
+  """
+  insert_users_one(
+    """the row to be inserted"""
+    object: users_insert_input!
+
+    """on conflict condition"""
+    on_conflict: users_on_conflict
+  ): users
+
+  """
+  insert data into the table: "verification_requests"
+  """
+  insert_verification_requests(
+    """the rows to be inserted"""
+    objects: [verification_requests_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: verification_requests_on_conflict
+  ): verification_requests_mutation_response
+
+  """
+  insert a single row into the table: "verification_requests"
+  """
+  insert_verification_requests_one(
+    """the row to be inserted"""
+    object: verification_requests_insert_input!
+
+    """on conflict condition"""
+    on_conflict: verification_requests_on_conflict
+  ): verification_requests
+
+  """
+  update data of the table: "accounts"
+  """
+  update_accounts(
+    """sets the columns of the filtered rows to the given values"""
+    _set: accounts_set_input
+
+    """filter the rows which have to be updated"""
+    where: accounts_bool_exp!
+  ): accounts_mutation_response
+
+  """
+  update single row of the table: "accounts"
+  """
+  update_accounts_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: accounts_set_input
+    pk_columns: accounts_pk_columns_input!
+  ): accounts
+
+  """
+  update data of the table: "allowed_roles"
+  """
+  update_allowed_roles(
+    """sets the columns of the filtered rows to the given values"""
+    _set: allowed_roles_set_input
+
+    """filter the rows which have to be updated"""
+    where: allowed_roles_bool_exp!
+  ): allowed_roles_mutation_response
+
+  """
+  update single row of the table: "allowed_roles"
+  """
+  update_allowed_roles_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: allowed_roles_set_input
+    pk_columns: allowed_roles_pk_columns_input!
+  ): allowed_roles
+
+  """
+  update data of the table: "roles"
+  """
+  update_roles(
+    """sets the columns of the filtered rows to the given values"""
+    _set: roles_set_input
+
+    """filter the rows which have to be updated"""
+    where: roles_bool_exp!
+  ): roles_mutation_response
+
+  """
+  update single row of the table: "roles"
+  """
+  update_roles_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: roles_set_input
+    pk_columns: roles_pk_columns_input!
+  ): roles
+
+  """
+  update data of the table: "users"
+  """
+  update_users(
+    """sets the columns of the filtered rows to the given values"""
+    _set: users_set_input
+
+    """filter the rows which have to be updated"""
+    where: users_bool_exp!
+  ): users_mutation_response
+
+  """
+  update single row of the table: "users"
+  """
+  update_users_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: users_set_input
+    pk_columns: users_pk_columns_input!
+  ): users
+
+  """
+  update data of the table: "verification_requests"
+  """
+  update_verification_requests(
+    """sets the columns of the filtered rows to the given values"""
+    _set: verification_requests_set_input
+
+    """filter the rows which have to be updated"""
+    where: verification_requests_bool_exp!
+  ): verification_requests_mutation_response
+
+  """
+  update single row of the table: "verification_requests"
+  """
+  update_verification_requests_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: verification_requests_set_input
+    pk_columns: verification_requests_pk_columns_input!
+  ): verification_requests
+}
+
+"""column ordering options"""
+enum order_by {
+  """in the ascending order, nulls last"""
+  asc
+
+  """in the ascending order, nulls first"""
+  asc_nulls_first
+
+  """in the ascending order, nulls last"""
+  asc_nulls_last
+
+  """in the descending order, nulls first"""
+  desc
+
+  """in the descending order, nulls first"""
+  desc_nulls_first
+
+  """in the descending order, nulls last"""
+  desc_nulls_last
+}
+
+"""query root"""
+type query_root {
+  """
+  fetch data from the table: "accounts"
+  """
+  accounts(
+    """distinct select on columns"""
+    distinct_on: [accounts_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [accounts_order_by!]
+
+    """filter the rows returned"""
+    where: accounts_bool_exp
+  ): [accounts!]!
+
+  """
+  fetch aggregated fields from the table: "accounts"
+  """
+  accounts_aggregate(
+    """distinct select on columns"""
+    distinct_on: [accounts_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [accounts_order_by!]
+
+    """filter the rows returned"""
+    where: accounts_bool_exp
+  ): accounts_aggregate!
+
+  """fetch data from the table: "accounts" using primary key columns"""
+  accounts_by_pk(id: uuid!): accounts
+
+  """
+  fetch data from the table: "allowed_roles"
+  """
+  allowed_roles(
+    """distinct select on columns"""
+    distinct_on: [allowed_roles_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [allowed_roles_order_by!]
+
+    """filter the rows returned"""
+    where: allowed_roles_bool_exp
+  ): [allowed_roles!]!
+
+  """
+  fetch aggregated fields from the table: "allowed_roles"
+  """
+  allowed_roles_aggregate(
+    """distinct select on columns"""
+    distinct_on: [allowed_roles_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [allowed_roles_order_by!]
+
+    """filter the rows returned"""
+    where: allowed_roles_bool_exp
+  ): allowed_roles_aggregate!
+
+  """fetch data from the table: "allowed_roles" using primary key columns"""
+  allowed_roles_by_pk(role: roles_enum!, user_id: uuid!): allowed_roles
+
+  """
+  fetch data from the table: "roles"
+  """
+  roles(
+    """distinct select on columns"""
+    distinct_on: [roles_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [roles_order_by!]
+
+    """filter the rows returned"""
+    where: roles_bool_exp
+  ): [roles!]!
+
+  """
+  fetch aggregated fields from the table: "roles"
+  """
+  roles_aggregate(
+    """distinct select on columns"""
+    distinct_on: [roles_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [roles_order_by!]
+
+    """filter the rows returned"""
+    where: roles_bool_exp
+  ): roles_aggregate!
+
+  """fetch data from the table: "roles" using primary key columns"""
+  roles_by_pk(value: String!): roles
+
+  """
+  fetch data from the table: "users"
+  """
+  users(
+    """distinct select on columns"""
+    distinct_on: [users_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [users_order_by!]
+
+    """filter the rows returned"""
+    where: users_bool_exp
+  ): [users!]!
+
+  """
+  fetch aggregated fields from the table: "users"
+  """
+  users_aggregate(
+    """distinct select on columns"""
+    distinct_on: [users_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [users_order_by!]
+
+    """filter the rows returned"""
+    where: users_bool_exp
+  ): users_aggregate!
+
+  """fetch data from the table: "users" using primary key columns"""
+  users_by_pk(id: uuid!): users
+
+  """
+  fetch data from the table: "verification_requests"
+  """
+  verification_requests(
+    """distinct select on columns"""
+    distinct_on: [verification_requests_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [verification_requests_order_by!]
+
+    """filter the rows returned"""
+    where: verification_requests_bool_exp
+  ): [verification_requests!]!
+
+  """
+  fetch aggregated fields from the table: "verification_requests"
+  """
+  verification_requests_aggregate(
+    """distinct select on columns"""
+    distinct_on: [verification_requests_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [verification_requests_order_by!]
+
+    """filter the rows returned"""
+    where: verification_requests_bool_exp
+  ): verification_requests_aggregate!
+
+  """
+  fetch data from the table: "verification_requests" using primary key columns
+  """
+  verification_requests_by_pk(id: uuid!): verification_requests
+}
+
+"""
+columns and relationships of "roles"
+"""
+type roles {
+  """An array relationship"""
+  allowed_roles(
+    """distinct select on columns"""
+    distinct_on: [allowed_roles_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [allowed_roles_order_by!]
+
+    """filter the rows returned"""
+    where: allowed_roles_bool_exp
+  ): [allowed_roles!]!
+
+  """An aggregated array relationship"""
+  allowed_roles_aggregate(
+    """distinct select on columns"""
+    distinct_on: [allowed_roles_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [allowed_roles_order_by!]
+
+    """filter the rows returned"""
+    where: allowed_roles_bool_exp
+  ): allowed_roles_aggregate!
+  description: String
+
+  """An array relationship"""
+  users(
+    """distinct select on columns"""
+    distinct_on: [users_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [users_order_by!]
+
+    """filter the rows returned"""
+    where: users_bool_exp
+  ): [users!]!
+
+  """An aggregated array relationship"""
+  users_aggregate(
+    """distinct select on columns"""
+    distinct_on: [users_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [users_order_by!]
+
+    """filter the rows returned"""
+    where: users_bool_exp
+  ): users_aggregate!
+  value: String!
+}
+
+"""
+aggregated selection of "roles"
+"""
+type roles_aggregate {
+  aggregate: roles_aggregate_fields
+  nodes: [roles!]!
+}
+
+"""
+aggregate fields of "roles"
+"""
+type roles_aggregate_fields {
+  count(columns: [roles_select_column!], distinct: Boolean): Int
+  max: roles_max_fields
+  min: roles_min_fields
+}
+
+"""
+order by aggregate values of table "roles"
+"""
+input roles_aggregate_order_by {
+  count: order_by
+  max: roles_max_order_by
+  min: roles_min_order_by
+}
+
+"""
+input type for inserting array relation for remote table "roles"
+"""
+input roles_arr_rel_insert_input {
+  data: [roles_insert_input!]!
+  on_conflict: roles_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "roles". All fields are combined with a logical 'AND'.
+"""
+input roles_bool_exp {
+  _and: [roles_bool_exp]
+  _not: roles_bool_exp
+  _or: [roles_bool_exp]
+  allowed_roles: allowed_roles_bool_exp
+  description: String_comparison_exp
+  users: users_bool_exp
+  value: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "roles"
+"""
+enum roles_constraint {
+  """unique or primary key constraint"""
+  roles_pkey
+}
+
+enum roles_enum {
+  user
+}
+
+"""
+expression to compare columns of type roles_enum. All fields are combined with logical 'AND'.
+"""
+input roles_enum_comparison_exp {
+  _eq: roles_enum
+  _in: [roles_enum!]
+  _is_null: Boolean
+  _neq: roles_enum
+  _nin: [roles_enum!]
+}
+
+"""
+input type for inserting data into table "roles"
+"""
+input roles_insert_input {
+  allowed_roles: allowed_roles_arr_rel_insert_input
+  description: String
+  users: users_arr_rel_insert_input
+  value: String
+}
+
+"""aggregate max on columns"""
+type roles_max_fields {
+  description: String
+  value: String
+}
+
+"""
+order by max() on columns of table "roles"
+"""
+input roles_max_order_by {
+  description: order_by
+  value: order_by
+}
+
+"""aggregate min on columns"""
+type roles_min_fields {
+  description: String
+  value: String
+}
+
+"""
+order by min() on columns of table "roles"
+"""
+input roles_min_order_by {
+  description: order_by
+  value: order_by
+}
+
+"""
+response of any mutation on the table "roles"
+"""
+type roles_mutation_response {
+  """number of affected rows by the mutation"""
+  affected_rows: Int!
+
+  """data of the affected rows by the mutation"""
+  returning: [roles!]!
+}
+
+"""
+input type for inserting object relation for remote table "roles"
+"""
+input roles_obj_rel_insert_input {
+  data: roles_insert_input!
+  on_conflict: roles_on_conflict
+}
+
+"""
+on conflict condition type for table "roles"
+"""
+input roles_on_conflict {
+  constraint: roles_constraint!
+  update_columns: [roles_update_column!]!
+  where: roles_bool_exp
+}
+
+"""
+ordering options when selecting data from "roles"
+"""
+input roles_order_by {
+  allowed_roles_aggregate: allowed_roles_aggregate_order_by
+  description: order_by
+  users_aggregate: users_aggregate_order_by
+  value: order_by
+}
+
+"""
+primary key columns input for table: "roles"
+"""
+input roles_pk_columns_input {
+  value: String!
+}
+
+"""
+select columns of table "roles"
+"""
+enum roles_select_column {
+  """column name"""
+  description
+
+  """column name"""
+  value
+}
+
+"""
+input type for updating data in table "roles"
+"""
+input roles_set_input {
+  description: String
+  value: String
+}
+
+"""
+update columns of table "roles"
+"""
+enum roles_update_column {
+  """column name"""
+  description
+
+  """column name"""
+  value
+}
+
+"""subscription root"""
+type subscription_root {
+  """
+  fetch data from the table: "accounts"
+  """
+  accounts(
+    """distinct select on columns"""
+    distinct_on: [accounts_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [accounts_order_by!]
+
+    """filter the rows returned"""
+    where: accounts_bool_exp
+  ): [accounts!]!
+
+  """
+  fetch aggregated fields from the table: "accounts"
+  """
+  accounts_aggregate(
+    """distinct select on columns"""
+    distinct_on: [accounts_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [accounts_order_by!]
+
+    """filter the rows returned"""
+    where: accounts_bool_exp
+  ): accounts_aggregate!
+
+  """fetch data from the table: "accounts" using primary key columns"""
+  accounts_by_pk(id: uuid!): accounts
+
+  """
+  fetch data from the table: "allowed_roles"
+  """
+  allowed_roles(
+    """distinct select on columns"""
+    distinct_on: [allowed_roles_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [allowed_roles_order_by!]
+
+    """filter the rows returned"""
+    where: allowed_roles_bool_exp
+  ): [allowed_roles!]!
+
+  """
+  fetch aggregated fields from the table: "allowed_roles"
+  """
+  allowed_roles_aggregate(
+    """distinct select on columns"""
+    distinct_on: [allowed_roles_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [allowed_roles_order_by!]
+
+    """filter the rows returned"""
+    where: allowed_roles_bool_exp
+  ): allowed_roles_aggregate!
+
+  """fetch data from the table: "allowed_roles" using primary key columns"""
+  allowed_roles_by_pk(role: roles_enum!, user_id: uuid!): allowed_roles
+
+  """
+  fetch data from the table: "roles"
+  """
+  roles(
+    """distinct select on columns"""
+    distinct_on: [roles_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [roles_order_by!]
+
+    """filter the rows returned"""
+    where: roles_bool_exp
+  ): [roles!]!
+
+  """
+  fetch aggregated fields from the table: "roles"
+  """
+  roles_aggregate(
+    """distinct select on columns"""
+    distinct_on: [roles_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [roles_order_by!]
+
+    """filter the rows returned"""
+    where: roles_bool_exp
+  ): roles_aggregate!
+
+  """fetch data from the table: "roles" using primary key columns"""
+  roles_by_pk(value: String!): roles
+
+  """
+  fetch data from the table: "users"
+  """
+  users(
+    """distinct select on columns"""
+    distinct_on: [users_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [users_order_by!]
+
+    """filter the rows returned"""
+    where: users_bool_exp
+  ): [users!]!
+
+  """
+  fetch aggregated fields from the table: "users"
+  """
+  users_aggregate(
+    """distinct select on columns"""
+    distinct_on: [users_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [users_order_by!]
+
+    """filter the rows returned"""
+    where: users_bool_exp
+  ): users_aggregate!
+
+  """fetch data from the table: "users" using primary key columns"""
+  users_by_pk(id: uuid!): users
+
+  """
+  fetch data from the table: "verification_requests"
+  """
+  verification_requests(
+    """distinct select on columns"""
+    distinct_on: [verification_requests_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [verification_requests_order_by!]
+
+    """filter the rows returned"""
+    where: verification_requests_bool_exp
+  ): [verification_requests!]!
+
+  """
+  fetch aggregated fields from the table: "verification_requests"
+  """
+  verification_requests_aggregate(
+    """distinct select on columns"""
+    distinct_on: [verification_requests_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [verification_requests_order_by!]
+
+    """filter the rows returned"""
+    where: verification_requests_bool_exp
+  ): verification_requests_aggregate!
+
+  """
+  fetch data from the table: "verification_requests" using primary key columns
+  """
+  verification_requests_by_pk(id: uuid!): verification_requests
+}
+
+scalar timestamptz
+
+"""
+expression to compare columns of type timestamptz. All fields are combined with logical 'AND'.
+"""
+input timestamptz_comparison_exp {
+  _eq: timestamptz
+  _gt: timestamptz
+  _gte: timestamptz
+  _in: [timestamptz!]
+  _is_null: Boolean
+  _lt: timestamptz
+  _lte: timestamptz
+  _neq: timestamptz
+  _nin: [timestamptz!]
+}
+
+"""
+columns and relationships of "users"
+"""
+type users {
+  """An array relationship"""
+  accounts(
+    """distinct select on columns"""
+    distinct_on: [accounts_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [accounts_order_by!]
+
+    """filter the rows returned"""
+    where: accounts_bool_exp
+  ): [accounts!]!
+
+  """An aggregated array relationship"""
+  accounts_aggregate(
+    """distinct select on columns"""
+    distinct_on: [accounts_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [accounts_order_by!]
+
+    """filter the rows returned"""
+    where: accounts_bool_exp
+  ): accounts_aggregate!
+
+  """An array relationship"""
+  allowed_roles(
+    """distinct select on columns"""
+    distinct_on: [allowed_roles_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [allowed_roles_order_by!]
+
+    """filter the rows returned"""
+    where: allowed_roles_bool_exp
+  ): [allowed_roles!]!
+
+  """An aggregated array relationship"""
+  allowed_roles_aggregate(
+    """distinct select on columns"""
+    distinct_on: [allowed_roles_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [allowed_roles_order_by!]
+
+    """filter the rows returned"""
+    where: allowed_roles_bool_exp
+  ): allowed_roles_aggregate!
+  created_at: timestamptz!
+  default_role: roles_enum!
+  email: String
+  email_verified: timestamptz
+  id: uuid!
+  image: String
+  name: String
+
+  """An object relationship"""
+  role: roles!
+  updated_at: timestamptz!
+}
+
+"""
+aggregated selection of "users"
+"""
+type users_aggregate {
+  aggregate: users_aggregate_fields
+  nodes: [users!]!
+}
+
+"""
+aggregate fields of "users"
+"""
+type users_aggregate_fields {
+  count(columns: [users_select_column!], distinct: Boolean): Int
+  max: users_max_fields
+  min: users_min_fields
+}
+
+"""
+order by aggregate values of table "users"
+"""
+input users_aggregate_order_by {
+  count: order_by
+  max: users_max_order_by
+  min: users_min_order_by
+}
+
+"""
+input type for inserting array relation for remote table "users"
+"""
+input users_arr_rel_insert_input {
+  data: [users_insert_input!]!
+  on_conflict: users_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "users". All fields are combined with a logical 'AND'.
+"""
+input users_bool_exp {
+  _and: [users_bool_exp]
+  _not: users_bool_exp
+  _or: [users_bool_exp]
+  accounts: accounts_bool_exp
+  allowed_roles: allowed_roles_bool_exp
+  created_at: timestamptz_comparison_exp
+  default_role: roles_enum_comparison_exp
+  email: String_comparison_exp
+  email_verified: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  image: String_comparison_exp
+  name: String_comparison_exp
+  role: roles_bool_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "users"
+"""
+enum users_constraint {
+  """unique or primary key constraint"""
+  users_email_key
+
+  """unique or primary key constraint"""
+  users_pkey
+}
+
+"""
+input type for inserting data into table "users"
+"""
+input users_insert_input {
+  accounts: accounts_arr_rel_insert_input
+  allowed_roles: allowed_roles_arr_rel_insert_input
+  created_at: timestamptz
+  default_role: roles_enum
+  email: String
+  email_verified: timestamptz
+  id: uuid
+  image: String
+  name: String
+  role: roles_obj_rel_insert_input
+  updated_at: timestamptz
+}
+
+"""aggregate max on columns"""
+type users_max_fields {
+  created_at: timestamptz
+  email: String
+  email_verified: timestamptz
+  id: uuid
+  image: String
+  name: String
+  updated_at: timestamptz
+}
+
+"""
+order by max() on columns of table "users"
+"""
+input users_max_order_by {
+  created_at: order_by
+  email: order_by
+  email_verified: order_by
+  id: order_by
+  image: order_by
+  name: order_by
+  updated_at: order_by
+}
+
+"""aggregate min on columns"""
+type users_min_fields {
+  created_at: timestamptz
+  email: String
+  email_verified: timestamptz
+  id: uuid
+  image: String
+  name: String
+  updated_at: timestamptz
+}
+
+"""
+order by min() on columns of table "users"
+"""
+input users_min_order_by {
+  created_at: order_by
+  email: order_by
+  email_verified: order_by
+  id: order_by
+  image: order_by
+  name: order_by
+  updated_at: order_by
+}
+
+"""
+response of any mutation on the table "users"
+"""
+type users_mutation_response {
+  """number of affected rows by the mutation"""
+  affected_rows: Int!
+
+  """data of the affected rows by the mutation"""
+  returning: [users!]!
+}
+
+"""
+input type for inserting object relation for remote table "users"
+"""
+input users_obj_rel_insert_input {
+  data: users_insert_input!
+  on_conflict: users_on_conflict
+}
+
+"""
+on conflict condition type for table "users"
+"""
+input users_on_conflict {
+  constraint: users_constraint!
+  update_columns: [users_update_column!]!
+  where: users_bool_exp
+}
+
+"""
+ordering options when selecting data from "users"
+"""
+input users_order_by {
+  accounts_aggregate: accounts_aggregate_order_by
+  allowed_roles_aggregate: allowed_roles_aggregate_order_by
+  created_at: order_by
+  default_role: order_by
+  email: order_by
+  email_verified: order_by
+  id: order_by
+  image: order_by
+  name: order_by
+  role: roles_order_by
+  updated_at: order_by
+}
+
+"""
+primary key columns input for table: "users"
+"""
+input users_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "users"
+"""
+enum users_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  default_role
+
+  """column name"""
+  email
+
+  """column name"""
+  email_verified
+
+  """column name"""
+  id
+
+  """column name"""
+  image
+
+  """column name"""
+  name
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "users"
+"""
+input users_set_input {
+  created_at: timestamptz
+  default_role: roles_enum
+  email: String
+  email_verified: timestamptz
+  id: uuid
+  image: String
+  name: String
+  updated_at: timestamptz
+}
+
+"""
+update columns of table "users"
+"""
+enum users_update_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  default_role
+
+  """column name"""
+  email
+
+  """column name"""
+  email_verified
+
+  """column name"""
+  id
+
+  """column name"""
+  image
+
+  """column name"""
+  name
+
+  """column name"""
+  updated_at
+}
+
+scalar uuid
+
+"""
+expression to compare columns of type uuid. All fields are combined with logical 'AND'.
+"""
+input uuid_comparison_exp {
+  _eq: uuid
+  _gt: uuid
+  _gte: uuid
+  _in: [uuid!]
+  _is_null: Boolean
+  _lt: uuid
+  _lte: uuid
+  _neq: uuid
+  _nin: [uuid!]
+}
+
+"""
+columns and relationships of "verification_requests"
+"""
+type verification_requests {
+  created_at: timestamptz!
+  expires: timestamptz
+  id: uuid!
+  identifier: String!
+  token: String!
+  updated_at: timestamptz!
+  url: String
+}
+
+"""
+aggregated selection of "verification_requests"
+"""
+type verification_requests_aggregate {
+  aggregate: verification_requests_aggregate_fields
+  nodes: [verification_requests!]!
+}
+
+"""
+aggregate fields of "verification_requests"
+"""
+type verification_requests_aggregate_fields {
+  count(columns: [verification_requests_select_column!], distinct: Boolean): Int
+  max: verification_requests_max_fields
+  min: verification_requests_min_fields
+}
+
+"""
+order by aggregate values of table "verification_requests"
+"""
+input verification_requests_aggregate_order_by {
+  count: order_by
+  max: verification_requests_max_order_by
+  min: verification_requests_min_order_by
+}
+
+"""
+input type for inserting array relation for remote table "verification_requests"
+"""
+input verification_requests_arr_rel_insert_input {
+  data: [verification_requests_insert_input!]!
+  on_conflict: verification_requests_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "verification_requests". All fields are combined with a logical 'AND'.
+"""
+input verification_requests_bool_exp {
+  _and: [verification_requests_bool_exp]
+  _not: verification_requests_bool_exp
+  _or: [verification_requests_bool_exp]
+  created_at: timestamptz_comparison_exp
+  expires: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  identifier: String_comparison_exp
+  token: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
+  url: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "verification_requests"
+"""
+enum verification_requests_constraint {
+  """unique or primary key constraint"""
+  verification_requests_pkey
+
+  """unique or primary key constraint"""
+  verification_requests_token_key
+}
+
+"""
+input type for inserting data into table "verification_requests"
+"""
+input verification_requests_insert_input {
+  created_at: timestamptz
+  expires: timestamptz
+  id: uuid
+  identifier: String
+  token: String
+  updated_at: timestamptz
+  url: String
+}
+
+"""aggregate max on columns"""
+type verification_requests_max_fields {
+  created_at: timestamptz
+  expires: timestamptz
+  id: uuid
+  identifier: String
+  token: String
+  updated_at: timestamptz
+  url: String
+}
+
+"""
+order by max() on columns of table "verification_requests"
+"""
+input verification_requests_max_order_by {
+  created_at: order_by
+  expires: order_by
+  id: order_by
+  identifier: order_by
+  token: order_by
+  updated_at: order_by
+  url: order_by
+}
+
+"""aggregate min on columns"""
+type verification_requests_min_fields {
+  created_at: timestamptz
+  expires: timestamptz
+  id: uuid
+  identifier: String
+  token: String
+  updated_at: timestamptz
+  url: String
+}
+
+"""
+order by min() on columns of table "verification_requests"
+"""
+input verification_requests_min_order_by {
+  created_at: order_by
+  expires: order_by
+  id: order_by
+  identifier: order_by
+  token: order_by
+  updated_at: order_by
+  url: order_by
+}
+
+"""
+response of any mutation on the table "verification_requests"
+"""
+type verification_requests_mutation_response {
+  """number of affected rows by the mutation"""
+  affected_rows: Int!
+
+  """data of the affected rows by the mutation"""
+  returning: [verification_requests!]!
+}
+
+"""
+input type for inserting object relation for remote table "verification_requests"
+"""
+input verification_requests_obj_rel_insert_input {
+  data: verification_requests_insert_input!
+  on_conflict: verification_requests_on_conflict
+}
+
+"""
+on conflict condition type for table "verification_requests"
+"""
+input verification_requests_on_conflict {
+  constraint: verification_requests_constraint!
+  update_columns: [verification_requests_update_column!]!
+  where: verification_requests_bool_exp
+}
+
+"""
+ordering options when selecting data from "verification_requests"
+"""
+input verification_requests_order_by {
+  created_at: order_by
+  expires: order_by
+  id: order_by
+  identifier: order_by
+  token: order_by
+  updated_at: order_by
+  url: order_by
+}
+
+"""
+primary key columns input for table: "verification_requests"
+"""
+input verification_requests_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "verification_requests"
+"""
+enum verification_requests_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  expires
+
+  """column name"""
+  id
+
+  """column name"""
+  identifier
+
+  """column name"""
+  token
+
+  """column name"""
+  updated_at
+
+  """column name"""
+  url
+}
+
+"""
+input type for updating data in table "verification_requests"
+"""
+input verification_requests_set_input {
+  created_at: timestamptz
+  expires: timestamptz
+  id: uuid
+  identifier: String
+  token: String
+  updated_at: timestamptz
+  url: String
+}
+
+"""
+update columns of table "verification_requests"
+"""
+enum verification_requests_update_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  expires
+
+  """column name"""
+  id
+
+  """column name"""
+  identifier
+
+  """column name"""
+  token
+
+  """column name"""
+  updated_at
+
+  """column name"""
+  url
+}

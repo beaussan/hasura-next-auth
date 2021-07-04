@@ -1,0 +1,1 @@
+CREATE TABLE "public"."allowed_roles"("user_id" uuid NOT NULL, "role" text NOT NULL, PRIMARY KEY ("user_id","role") , FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON UPDATE restrict ON DELETE cascade, FOREIGN KEY ("role") REFERENCES "public"."roles"("value") ON UPDATE cascade ON DELETE cascade, UNIQUE ("user_id", "role"));

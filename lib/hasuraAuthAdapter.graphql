@@ -1,0 +1,137 @@
+query getUserByEmail($email: String!) {
+  users(where: { email: { _eq: $email } }) {
+    ...UserForAuth
+  }
+}
+
+mutation createVerificationRequest(
+  $config: verification_requests_insert_input!
+) {
+  insert_verification_requests_one(
+    object: $config
+    on_conflict: { constraint: verification_requests_pkey, update_columns: [] }
+  ) {
+    id
+  }
+}
+
+query getUserByProviderAccountId(
+  $providerId: String!
+  $providerAccountId: String!
+) {
+  accounts(
+    where: {
+      provider_id: { _eq: $providerId }
+      _and: { provider_account_id: { _eq: $providerAccountId } }
+    }
+  ) {
+    user {
+      ...UserForAuth
+    }
+  }
+}
+
+query getVerificationRequestByIdentifierAndToken(
+  $identifier: String!
+  $token: String!
+) {
+  verification_requests(
+    limit: 1
+    where: {
+      identifier: { _eq: $identifier }
+      _and: { token: { _eq: $token } }
+    }
+  ) {
+    expires
+    created_at
+    updated_at
+    id
+    identifier
+    token
+  }
+}
+
+mutation deleteVerificationRequestByIdentifierAndToken(
+  $identifier: String!
+  $token: String!
+) {
+  delete_verification_requests(
+    where: {
+      identifier: { _eq: $identifier }
+      _and: { token: { _eq: $token } }
+    }
+  ) {
+    affected_rows
+  }
+}
+
+query getUserById($id: uuid!) {
+  users_by_pk(id: $id) {
+    ...UserForAuth
+  }
+}
+
+fragment UserForAuth on users {
+  id
+  email
+  email_verified
+  image
+  created_at
+  updated_at
+  name
+  default_role
+  allowed_roles {
+    role
+  }
+}
+
+mutation createUserByEmail(
+  $email: String!
+  $verified: timestamptz
+  $name: String
+  $image: String
+) {
+  insert_users_one(
+    on_conflict: {
+      constraint: users_email_key
+      update_columns: [email_verified]
+    }
+    object: {
+      email_verified: $verified
+      email: $email
+      name: $name
+      image: $image
+      default_role: user
+      allowed_roles: {
+        data: [{ role: user }]
+        on_conflict: { update_columns: [], constraint: allowed_roles_pkey }
+      }
+    }
+  ) {
+    ...UserForAuth
+  }
+}
+
+mutation linkAccount($object: accounts_insert_input!) {
+  insert_accounts_one(
+    object: $object
+    on_conflict: { constraint: accounts_compound_id_key, update_columns: [] }
+  ) {
+    id
+  }
+}
+
+mutation setTimeEmailVerified($userId: uuid!, $time: timestamptz) {
+  update_users_by_pk(
+    pk_columns: { id: $userId }
+    _set: { email_verified: $time }
+  ) {
+    ...UserForAuth
+  }
+}
+
+mutation deleteUserById($id: uuid!) {
+  delete_users_by_pk(id: $id) {
+    id
+  }
+}
